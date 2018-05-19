@@ -11,6 +11,7 @@ namespace RunningJournalApi.AcceptanceTests
     public class HomeJsonTests
     {
         [Fact]
+        [UseDatabase]
         public async Task GetReturnsResponseWithCorrectStatusCode()
         {
             using (var client = HttpClientFactory.Create())
@@ -22,6 +23,7 @@ namespace RunningJournalApi.AcceptanceTests
         }
 
         [Fact]
+        [UseDatabase]
         public async Task PostReturnsPesponseWithCorrectStatusCode()
         {
             using (var client = HttpClientFactory.Create())
@@ -79,7 +81,7 @@ namespace RunningJournalApi.AcceptanceTests
             entry.UserId = userId;
             db.JournalEntry.Insert(entry);
 
-            using (var client = HttpClientFactory.Create(userName))
+            using (var client = HttpClientFactory.Create())
             {
                 var response = client.GetAsync("").Result;
 
